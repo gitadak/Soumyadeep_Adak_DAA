@@ -122,7 +122,7 @@ int main()
     int nodes, edges, weight, u, v;
     edge_list elist;
     edge_list spanlist;
-    int adjMatrix[MAX_NODES][MAX_NODES];
+    int adjMatrix[MAX_NODES][MAX_NODES]={0};
 
     printf("Enter number of nodes in the graph: ");
     scanf("%d", &nodes);
