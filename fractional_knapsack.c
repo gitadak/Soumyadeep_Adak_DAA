@@ -25,10 +25,10 @@ void obj_sort(obj a[50],int n)
 	int i,j,flag;
 	obj t;
 	
-	for(i=0; i<n-1; i++)
+	for(i=1; i<=n; i++)
 	{
 		flag=0;
-		for(j=0;j<n-1-i;j++)
+		for(j=1;j<=n-i;j++)
 		{
 			if(a[j].pw_ratio < a[j+1].pw_ratio)
 			{
@@ -128,7 +128,7 @@ int main()
 		scanf("%d",&bag[i].weight);
 		printf("Object %d profitt = ",i);
 		scanf("%d",&bag[i].profit);
-		bag[i].pw_ratio=bag[i].profit/bag[i].weight;
+		bag[i].pw_ratio=bag[i].profit/(float)bag[i].weight;
 	}
 
 	obj_sort(bag,n);
@@ -140,20 +140,28 @@ int main()
 /*
 Output:
 ------
-Enter the capacity of the knapsack: 20
-Enter the number of objects: 3
+Enter the capacity of the knapsack: 15
+Enter the number of objects: 7
 Enter the object details...
-Object 1 weight = 18
-Object 1 profitt = 25
-Object 2 weight = 15
-Object 2 profitt = 24
-Object 3 weight = 10
+Object 1 weight = 2
+Object 1 profitt = 10
+Object 2 weight = 3
+Object 2 profitt = 5
+Object 3 weight = 5
 Object 3 profitt = 15
+Object 4 weight = 7
+Object 4 profitt = 7
+Object 5 weight = 1
+Object 5 profitt = 6
+Object 6 weight = 4
+Object 6 profitt = 18
+Object 7 weight = 1
+Object 7 profitt = 3
 The Knapsack:
-Object  :      1      2      3
-Fraction:   0.00   1.00   0.50
-Weight  :      0     15      5
-Profit  :   0.00  24.00   7.50
-Net weight = 20
-Net profit = 31.50
+Object  :      1      2      3      4      5      6      7
+Fraction:   1.00   0.67   1.00   0.00   1.00   1.00   1.00
+Weight  :      2      2      5      0      1      4      1
+Profit  :  10.00   3.33  15.00   0.00   6.00  18.00   3.00
+Net weight = 15
+Net profit = 55.33
 */
