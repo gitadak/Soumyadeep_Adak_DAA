@@ -79,3 +79,32 @@ int main()
 	
 	return 0;
 }
+/*
+Output:
+------
+Enter the no. of jobs: 10
+Enter the starting and ending times of the jobs:
+Job 1 start time: 1
+Job 1 end time: 3
+Job 2 start time: 2
+Job 2 end time: 5
+Job 3 start time: 3
+Job 3 end time: 4
+Job 4 start time: 4
+Job 4 end time: 7
+Job 5 start time: 7
+Job 5 end time: 10
+Job 6 start time: 8
+Job 6 end time: 9
+Job 7 start time: 9
+Job 7 end time: 11
+Job 8 start time: 9
+Job 8 end time: 13
+Job 9 start time: 11
+Job 9 end time: 12
+Job 10 start time: 12
+Job 10 end time: 14
+The max no. of jobs can be completed= 7
+The jobs are:
+  1  3  4  6  7  9 10
+*/
