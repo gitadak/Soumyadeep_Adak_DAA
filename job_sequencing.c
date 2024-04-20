@@ -20,7 +20,7 @@ void job_sort(job a[50],int n)
 		flag=0;
 		for(j=0;j<n-1-i;j++)
 		{
-			if(a[j].profit <= a[j+1].profit)
+			if(a[j].profit < a[j+1].profit)
 			{
 				t=a[j];
 				a[j]=a[j+1];
@@ -81,12 +81,23 @@ void job_sequence(job a[50],int n,int max)
 		}
 	}
 	
-	printf("Job sequence:\n");
+	printf("Job sequence:");
+    	printf("\nHour  :");
 	for(i=1;i<=max;i++)
 	{
-		printf("%dth hour: Job=%d profit=%d\n",i,m[i].seq,m[i].profit);
+		printf("%5d",i);
 	}
-	printf("Net profit = %d",total_profit);
+   	printf("\nJob   :");
+	for(i=1;i<=max;i++)
+	{
+		printf("%5d",m[i].seq);
+	}
+    	printf("\nProfit:");
+	for(i=1;i<=max;i++)
+	{
+		printf("%5d",m[i].profit);
+	}
+	printf("\nNet profit = %d",total_profit);
 }
 
 int main()
