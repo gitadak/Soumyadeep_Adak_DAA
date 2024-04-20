@@ -124,3 +124,24 @@ int main()
 	
 	return 0;
 }
+/*
+Output:
+------
+Enter the no. of jobs: 5
+Enter the details of job:
+Job 1 profit: 10
+Job 1 deadline: 2
+Job 2 profit: 15
+Job 2 deadline: 2
+Job 3 profit: 10
+Job 3 deadline: 1
+Job 4 profit: 5
+Job 4 deadline: 3
+Job 5 profit: 1
+Job 5 deadline: 3
+Job sequence:
+Hour  :    1    2    3
+Job   :    1    2    4
+Profit:   10   15    5
+Net profit = 30
+*/
