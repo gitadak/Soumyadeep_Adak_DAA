@@ -1,3 +1,6 @@
+//Minimum cost spanning tree (MST) by Prim's algorithm
+//For un-directed graph
+
 #include <stdio.h>
 
 #define MAX_NODES 100
