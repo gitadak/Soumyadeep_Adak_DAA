@@ -45,7 +45,7 @@ int minKey(int key[MAX_NODES], int mstSet[MAX_NODES], int nodes)
 
 void primMST(int nodes, int adjMatrix[MAX_NODES][MAX_NODES])
 {
-    int parent[MAX_NODES], key[MAX_NODES], net_weight=0, u, mstSet[MAX_NODES],i,count;
+    int parent[MAX_NODES], key[MAX_NODES], net_weight=0, u, mstSet[MAX_NODES],i,count,v;
 
     for (i = 0; i < nodes; i++)
     {
@@ -60,7 +60,7 @@ void primMST(int nodes, int adjMatrix[MAX_NODES][MAX_NODES])
     {
         u = minKey(key, mstSet, nodes);
         mstSet[u] = 1;
-        for (int v = 0; v < nodes; v++)
+        for (v = 0; v < nodes; v++)
             // Check if the edge exists and it is either not included in MST or has a weight less than the current key
             if (adjMatrix[u][v] <= key[v] && !mstSet[v])
             {
