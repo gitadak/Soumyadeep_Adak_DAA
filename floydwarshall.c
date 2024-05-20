@@ -9,6 +9,8 @@ void addEdge(int graph[][MAX_VERTICES], int src, int dest, int weight, int direc
 int main()
 {
     int V, E, ch, src, dest, weight, i, j, graph[MAX_VERTICES][MAX_VERTICES];
+    printf("PRESS 1: Directed\nPRESS 0: Un-directed\nEnter choice: ");
+    scanf("%d",&ch);
     printf("Enter number of vertices: ");
     scanf("%d", &V);
     printf("Enter number of edges: ");
@@ -97,18 +99,21 @@ void printSolution(int V, int dist[][MAX_VERTICES])
 /*
 Output:
 ------
+PRESS 1: Directed
+PRESS 0: Un-directed
+Enter choice: 1
 Enter number of vertices: 5
 Enter number of edges: 9
 Enter the edges (format: source destination weight) (node value starts from 1):
 1 2 3
 1 3 8
 1 5 -4
-3 2 4
+5 4 6
+4 1 2
 2 5 7
 2 4 1
 4 3 -5
-5 4 6
-4 1 2
+3 2 4
 
 Initial Weight Matrix:
     0    3    8    ∞   -4
