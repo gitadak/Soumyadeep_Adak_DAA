@@ -1,4 +1,4 @@
-//Single source shortest path Djkstra's algorithm 
+//Single source shortest path Dijkstra's algorithm 
 //For directed and un-directed graph
 
 #include <stdio.h>
