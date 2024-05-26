@@ -1,134 +1,127 @@
 //Job sequencing problem
-
 #include<stdio.h>
+#define MAX 50
 
-struct job
+struct obj
 {
-	int seq;
-	int profit;
-	int deadline;
+    int seq;
+    int profit;
+    int deadline;
 };
-typedef struct job job;
+typedef struct obj obj;
 
-void job_sort(job a[50],int n)
+void sortObj(obj a[MAX], int n)
 {
-	int i,j,flag;
-	job t;
-	
-	for(i=0; i<n-1; i++)
-	{
-		flag=0;
-		for(j=0;j<n-1-i;j++)
-		{
-			if(a[j].profit < a[j+1].profit)
-			{
-				t=a[j];
-				a[j]=a[j+1];
-				a[j+1]=t;
-				flag=1;
-			}
-		}
-		if(flag == 0)
-			return;
-	}
+    int i,j,flag;
+    obj t;
+
+    for(i=1;i<=n;i++)
+    {
+        flag = 0;
+        for(j=1;j<=n-i;j++)
+        {
+            if(a[j].profit < a[j+1].profit)
+            {
+                t = a[j];
+                a[j] = a[j+1];
+                a[j+1] = t;
+                flag = 1;
+            }
+        }
+        if(!flag)
+            return;
+    }
 }
 
-int max_deadline(job a[50],int n)
+int max_deadline(obj a[MAX],int n)
 {
-	int i,max_dead=a[0].deadline;
-	for(i=1;i<n;i++)
-	{
-		if(a[i].deadline > max_dead)
-			max_dead=a[i].deadline;
-	}	
-	
-	return max_dead;
+    int max = a[1].deadline, i;
+    for(i=2;i<=n;i++)
+        max = a[i].deadline > max ? a[i].deadline : max;
+    return max;
 }
 
-void job_sequence(job a[50],int n,int max)
+void sequencing(obj a[MAX],int n)
 {
-	int i,j,k,total_profit=0;
-	job m[50];
-	
-	for(i=0;i<=max;i++)
-	{
-		m[i].seq=0;
-		m[i].profit=0;
-		m[i].deadline=i;
-	}
-	
-	for(i=0;i<n;i++)
-	{
-		k=a[i].deadline;
-		if(m[k].seq == 0)
-		{
-			m[k].seq=a[i].seq;
-			m[k].profit=a[i].profit;
-			total_profit+=m[k].profit;
-		}
-		else
-		{
-			for(j=1;j<k;j++)
-			{
-				if(m[j].seq==0)
-				{
-					m[j].seq=a[i].seq;
-					m[j].profit=a[i].profit;	
-					total_profit+=m[j].profit;	
-					break;	
-				}
-			}
-		}
-	}
-	
-	printf("Job sequence:");
-    	printf("\nHour  :");
-	for(i=1;i<=max;i++)
-	{
-		printf("%5d",i);
-	}
-   	printf("\nJob   :");
-	for(i=1;i<=max;i++)
-	{
-		printf("%5d",m[i].seq);
-	}
-    	printf("\nProfit:");
-	for(i=1;i<=max;i++)
-	{
-		printf("%5d",m[i].profit);
-	}
-	printf("\nNet profit = %d",total_profit);
+    int i, k, j, netProfit = 0, max_dead;
+    obj x[MAX];
+
+    max_dead = max_deadline(a,n);
+    for(i=0;i<=max_dead;i++)
+    {
+        x[i].seq = 0;
+        x[i].profit = 0;
+        x[i].deadline = i;
+    }
+
+    for(i=1;i<=n;i++)
+    {
+        k = a[i].deadline;
+        if(x[k].seq == 0)
+        {
+            x[k].seq = a[i].seq;
+            x[k].profit = a[i].profit;
+            netProfit += x[k].profit;
+        }
+        else
+        {
+            for(j=1;j<k;j++)
+            {
+                if(x[j].seq == 0)
+                {
+                    x[j].seq = a[i].seq;
+                    x[j].profit = a[i].profit;
+                    netProfit += x[j].profit;
+                    break;
+                }
+            }
+        }
+    }
+
+    printf("\nJob Sequence:");
+    printf("\nSeq     :");
+    for(i=1;i<=max_dead;i++)
+        printf("%7d",x[i].seq);
+    printf("\nProfit  :");
+    for(i=1;i<=max_dead;i++)
+        printf("%7d",x[i].profit);
+    printf("\nDeadline:");
+    for(i=1;i<=max_dead;i++)
+        printf("%7d",x[i].deadline);
+    printf("\nNet Profit = %5d",netProfit);
 }
 
 int main()
 {
-	int i,n,max;
-	job a[50];
-	
-	printf("Enter the no. of jobs: ");
-	scanf("%d",&n);
-	
-	printf("Enter the details of job:\n");
-	for(i=0;i<n;i++)
-	{
-		a[i].seq=i+1;
-		printf("Job %d profit: ",i+1);
-		scanf("%d",&a[i].profit);
-		printf("Job %d deadline: ",i+1);
-		scanf("%d",&a[i].deadline);		
-	}
-	
-	job_sort(a,n);
-	max=max_deadline(a,n);
-	job_sequence(a,n,max);
-	
-	return 0;
+    int i,n;
+    obj m[MAX];
+
+    printf("Enter the number of jobs: ");
+    scanf("%d",&n);
+    printf("Enter the job details...\n");
+    m[0].seq = 0;
+    m[0].profit = 0;
+    m[0].deadline = 0;
+    for(i=1;i<=n;i++)
+    {
+        m[i].seq = i;
+        printf("Job %d profit: ",i);
+        scanf("%d",&m[i].profit);
+        printf("Job %d deadline: ",i);
+        scanf("%d",&m[i].deadline);
+    }
+
+    sortObj(m,n);
+    sequencing(m,n);
+
+    return 0;
 }
+
 /*
 Output:
 ------
-Enter the no. of jobs: 5
-Enter the details of job:
+Enter the number of jobs: 5
+Enter the job details...
 Job 1 profit: 10
 Job 1 deadline: 2
 Job 2 profit: 15
@@ -139,9 +132,10 @@ Job 4 profit: 5
 Job 4 deadline: 3
 Job 5 profit: 1
 Job 5 deadline: 3
-Job sequence:
-Hour  :    1    2    3
-Job   :    1    2    4
-Profit:   10   15    5
-Net profit = 30
+
+Job Sequence:
+Seq     :      1      2      4
+Profit  :     10     15      5
+Deadline:      1      2      3
+Net Profit =    30
 */
